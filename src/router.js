@@ -1,9 +1,8 @@
 const express = require("express");
+const cadastroController = require("./controller/cadastrosController");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.status(200).send("Hello teste");
-});
+router.get("/cadastros", cadastroController.getAll);
 
 module.exports = router;
