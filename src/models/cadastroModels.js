@@ -22,7 +22,32 @@ const createAgente = async (agente) => {
     return createdAgente;
 };
 
+const deleteAgente = async (nome) => {
+    const query = "DELETE FROM cad_agentes WHERE nome = ?";
+
+    const removedAgente = await connection.execute(query, [nome]);
+
+    return removedAgente;
+};
+
+const updateAgente = async (id, agente) => {
+    const query =
+        "UPDATE cad_agentes SET nome = ?, email = ?, tipo = ?  WHERE  id = ? ";
+
+    const { nome, email, tipo } = agente;
+
+    const [updatedAgente] = await connection.execute(query, [
+        nome,
+        email,
+        tipo,
+        id,
+    ]);
+    return updatedAgente;
+};
+
 module.exports = {
     getAll,
     createAgente,
+    deleteAgente,
+    updateAgente,
 };

@@ -12,7 +12,23 @@ const createAgente = async (req, res) => {
     return res.status(201).json(`Id cadastrado: ${createdAgente.insertId}`);
 };
 
+const deleteAgente = async (req, res) => {
+    const { nome } = req.params;
+
+    await cadastroModel.deleteAgente(nome);
+    return res.status(204).json();
+};
+
+const updateAgente = async (req, res) => {
+    const { id } = req.params;
+    await cadastroModel.updateAgente(id, req.body);
+
+    return res.status(204).json();
+};
+
 module.exports = {
     getAll,
     createAgente,
+    deleteAgente,
+    updateAgente,
 };
