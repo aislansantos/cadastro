@@ -9,7 +9,7 @@ const getAll = async (_req, res) => {
 const createAgente = async (req, res) => {
     const createdAgente = await cadastroModel.createAgente(req.body);
 
-    return res.status(201).json(req.body);
+    return res.status(201).json(`Id cadastrado: ${createdAgente.insertId}`);
 };
 
 module.exports = {
