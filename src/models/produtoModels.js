@@ -1,4 +1,3 @@
-const { Connection } = require("mysql2/typings/mysql/lib/Connection");
 const connection = require("./connection");
 
 const getAllTypeProcuct = async () => {
@@ -41,9 +40,25 @@ const updateTypeProduct = async (id, typeProduct) => {
 
 const getAllProducts = async () => {
     const query = "SELECT * FROM products_cad";
+
+
     const [products] = await connection.execute(query);
 
     return products;
+};
+
+const createProduct = async (product) => {
+    const { descricao, codigo_type_product } = product;
+
+    const query =
+        "INSERT INTO products_cad (descricao, estoque, codigo_type_product) VALUES (?, 0, ?)";
+
+    const [createdProduct] = await connection.execute(query, [
+        descricao,
+        codigo_type_product,
+    ]);
+
+    return createdProduct;
 };
 
 module.exports = {
@@ -52,4 +67,5 @@ module.exports = {
     deleteTypeProduct,
     updateTypeProduct,
     getAllProducts,
+    createProduct,
 };

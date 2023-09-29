@@ -31,16 +31,24 @@ const updateTypeProduct = async (req, res) => {
 };
 
 //referente ao cadastro geral dos produtos
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (_req, res) => {
     const products = await produtoModel.getAllProducts();
 
-    return res.satus(200).json(products);
+    return res.status(200).json(products);
+};
+const createProduct = async (req, res) => {
+    const createdProduct = await produtoModel.createProduct(req.body);
+
+    return res.status(201).json(createdProduct.insertId);
 };
 
 module.exports = {
+    //type of products
     getAllTypeProcuct,
     createTypeProduct,
     deleteTypeProduct,
     updateTypeProduct,
+    //products
     getAllProducts,
+    createProduct,
 };
