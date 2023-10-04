@@ -1,6 +1,7 @@
 const express = require("express");
 const cadastroController = require("./controller/cadastrosController");
 const produtosController = require("./controller/produtosController");
+const purchaseOrderController = require("./controller/purchaseOrderController");
 const cadastroMiddleware = require("./middleware/agentMiddleware");
 const productsMiddleware = require("./middleware/productsMiddleware");
 
@@ -37,5 +38,8 @@ router.post(
     productsMiddleware.validateProductBody,
     produtosController.createProduct
 );
+
+// referente as rotas de pedido de compra
+router.get("/purchaseOrder", purchaseOrderController.getAllPurchaseOrder);
 
 module.exports = router;

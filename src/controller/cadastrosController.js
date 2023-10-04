@@ -2,7 +2,6 @@ const cadastroModel = require("../models/cadastroModels");
 
 const getAll = async (_req, res) => {
     const agentes = await cadastroModel.getAll();
-
     return res.status(200).json(agentes);
 };
 
