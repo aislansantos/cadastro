@@ -19,6 +19,15 @@ const validateBody = (req, res, next) => {
     next();
 };
 
+const validateGet = (req, res, next) => {
+    const { nome } = req.params;
+
+    console.log(nome);
+
+    next();
+};
+
 module.exports = {
     validateBody,
+    validateGet,
 };

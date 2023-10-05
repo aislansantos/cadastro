@@ -1,3 +1,5 @@
+const purchaseOrderModels = require("../models/purchaseOrderModels"); // -> usar o get para saber se o pedido com o mesmo numero e agente existem.
+
 const validateData = (req, res, next) => {
     const { body } = req;
 
@@ -13,12 +15,14 @@ const validateData = (req, res, next) => {
         });
     }
     if (Number.isInteger(body.numero_pedido) == false) {
-        return res.status(400).json("Campo digitador no formato errado!, campo com valor numerico esperado");
+        return res
+            .status(400)
+            .json(
+                "Campo digitador no formato errado!, campo com valor numerico esperado"
+            );
     }
 
-
-
-    console.log(typeof(body));
+    console.log(typeof body);
     next();
 };
 

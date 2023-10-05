@@ -3,7 +3,7 @@ const produtoModel = require("../models/produtoModels");
 // referente ao tipo de produtos
 const getAllTypeProcuct = async (req, res) => {
     const typesProd = await produtoModel.getAllTypeProcuct();
-
+    
     return res.status(200).json(typesProd);
 };
 

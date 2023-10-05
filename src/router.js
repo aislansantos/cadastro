@@ -9,6 +9,7 @@ const purchaseOrderMiddleware = require("./middleware/purchaseOrderMiddleware");
 const router = express.Router();
 
 router.get("/cadastros", cadastroController.getAll);
+router.get("/cadastro/:nome",cadastroMiddleware.validateGet, cadastroController.getAgente);
 router.post(
     "/cadastro",
     cadastroMiddleware.validateBody,
@@ -42,6 +43,10 @@ router.post(
 
 // referente as rotas de pedido de compra
 router.get("/purchasesOrder", purchaseOrderController.getAllPurchaseOrder);
-router.post("/purchaseOrder", purchaseOrderMiddleware.validateData, purchaseOrderController.createPurchaseOrder);
+router.post(
+    "/purchaseOrder",
+    purchaseOrderMiddleware.validateData,
+    purchaseOrderController.createPurchaseOrder
+);
 
 module.exports = router;

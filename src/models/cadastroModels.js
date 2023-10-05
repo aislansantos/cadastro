@@ -5,6 +5,12 @@ const getAll = async () => {
     return agentes;
 };
 
+const getAgente = async (nome) => {
+    const query = "SELECT * FROM cad_agentes WHERE nome = ? ";
+    const [selectedAgente] = await connection.execute(query, [nome]);
+    return selectedAgente;
+};
+
 const createAgente = async (agente) => {
     const { nome, email, tipo } = agente;
     const dateUTC = new Date(Date.now()).toUTCString();
@@ -47,6 +53,7 @@ const updateAgente = async (id, agente) => {
 
 module.exports = {
     getAll,
+    getAgente,
     createAgente,
     deleteAgente,
     updateAgente,

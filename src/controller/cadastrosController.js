@@ -5,6 +5,14 @@ const getAll = async (_req, res) => {
     return res.status(200).json(agentes);
 };
 
+const getAgente = async (req, res) => {
+    const { nome } = req.params;
+
+    const agente = await cadastroModel.getAgente(nome);
+
+    return res.status(200).json(agente);
+};
+
 const createAgente = async (req, res) => {
     const createdAgente = await cadastroModel.createAgente(req.body);
 
@@ -27,6 +35,7 @@ const updateAgente = async (req, res) => {
 
 module.exports = {
     getAll,
+    getAgente,
     createAgente,
     deleteAgente,
     updateAgente,

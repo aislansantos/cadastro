@@ -10,7 +10,7 @@ const createPurchaseOrder = async (req, res) => {
         req.body
     );
 
-    return res.status(201).json(createdPurchaseOrder);
+    return res.status(201).json(`Cadastrado Pedido ID: ${createdPurchaseOrder.insertId}!`);
 };
 
 module.exports = {
