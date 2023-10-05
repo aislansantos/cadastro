@@ -7,14 +7,16 @@ const getAllPurchaseOrder = async () => {
 };
 
 const createPurchaseOrder = async (purchaseOrder) => {
-    const { numero_pedido, ID_agente } = purchaseOrder;
-
+    const { numero_pedido, ID_agente, obs } = purchaseOrder;
+    const dateUTC = new Date(Date.now());
     const query =
-        "INSERT INTO pedido_compra (numero_pedido, ID_agente) VALUES (?,?)";
+        "INSERT INTO pedido_compra (numero_pedido, ID_agente, obs, date_order) VALUES (?,?,?,?)";
 
     const [createdPurchaseOrder] = await connection.execute(query, [
         numero_pedido,
         ID_agente,
+        obs,
+        dateUTC,
     ]);
 
     return createdPurchaseOrder;
