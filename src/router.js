@@ -4,6 +4,7 @@ const produtosController = require("./controller/produtosController");
 const purchaseOrderController = require("./controller/purchaseOrderController");
 const cadastroMiddleware = require("./middleware/agentMiddleware");
 const productsMiddleware = require("./middleware/productsMiddleware");
+const purchaseOrderMiddleware = require("./middleware/purchaseOrderMiddleware");
 
 const router = express.Router();
 
@@ -40,6 +41,7 @@ router.post(
 );
 
 // referente as rotas de pedido de compra
-router.get("/purchaseOrder", purchaseOrderController.getAllPurchaseOrder);
+router.get("/purchasesOrder", purchaseOrderController.getAllPurchaseOrder);
+router.post("/purchaseOrder", purchaseOrderMiddleware.validateData, purchaseOrderController.createPurchaseOrder);
 
 module.exports = router;

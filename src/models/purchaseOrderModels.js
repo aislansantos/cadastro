@@ -2,10 +2,25 @@ const connection = require("./connection");
 
 const getAllPurchaseOrder = async () => {
     const query = "SELECT * FROM pedido_compra";
-    const [purchaseOrder] =await connection.execute(query);
+    const [purchaseOrder] = await connection.execute(query);
     return purchaseOrder;
+};
+
+const createPurchaseOrder = async (purchaseOrder) => {
+    const { numero_pedido, ID_agente } = purchaseOrder;
+
+    const query =
+        "INSERT INTO pedido_compra (numero_pedido, ID_agente) VALUES (?,?)";
+
+    const [createdPurchaseOrder] = await connection.execute(query, [
+        numero_pedido,
+        ID_agente,
+    ]);
+
+    return createdPurchaseOrder;
 };
 
 module.exports = {
     getAllPurchaseOrder,
+    createPurchaseOrder,
 };
