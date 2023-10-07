@@ -5,5 +5,6 @@
 <p>Estudo usando nodemon e Mysql2(docker)</p>
 <p>Estudo de desevolvimento de webAPI e consumo da mesma - sistema de controle de pedido de compra e venda.</p>
 
-## endPoint para cidades cadastradas:
+## Endpoint
+para cidades cadastradas:
 localhost:port/cidades
