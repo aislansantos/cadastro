@@ -1,4 +1,11 @@
-# Cadastro -> nodejs/express
+# API - pedidos de venda
+
+construção de API para cadastro de cidades, agentes(clientes/fornecedores), vendedores, tipos de produtos e produtos, com foco no estudo das seguintes tecnologias:
+* JavaScript
+* NodeJS
+* Express
+* Nodemon
+* Eslint
 
 <p align="center">Estudo sobre desenvolvimento com NodeJs e Express</p>
 
