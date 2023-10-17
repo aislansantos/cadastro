@@ -1,7 +1,9 @@
 const express = require("express");
+const cidadesController = require("./controller/cidadesController");
 const cadastroController = require("./controller/cadastrosController");
 const produtosController = require("./controller/produtosController");
 const purchaseOrderController = require("./controller/purchaseOrderController");
+const cidadesMiddleware = require("./middleware/cidadesMiddleware");
 const cadastroMiddleware = require("./middleware/agentMiddleware");
 const productsMiddleware = require("./middleware/productsMiddleware");
 const purchaseOrderMiddleware = require("./middleware/purchaseOrderMiddleware");
@@ -9,7 +11,11 @@ const purchaseOrderMiddleware = require("./middleware/purchaseOrderMiddleware");
 const router = express.Router();
 
 router.get("/cadastros", cadastroController.getAll);
-router.get("/cadastro/:nome",cadastroMiddleware.validateGet, cadastroController.getAgente);
+router.get(
+    "/cadastro/:nome",
+    cadastroMiddleware.validateGet,
+    cadastroController.getAgente
+);
 router.post(
     "/cadastro",
     cadastroMiddleware.validateBody,
@@ -48,5 +54,10 @@ router.post(
     purchaseOrderMiddleware.validateData,
     purchaseOrderController.createPurchaseOrder
 );
+
+//referente as rotas de cidade
+router.get("/cidades", cidadesController.getAllCities);
+router.get("/cidade/:municipio", cidadesController.getCity);
+router.post("/cidade", cidadesMiddleware.validateCity, cidadesController.createCity);
 
 module.exports = router;

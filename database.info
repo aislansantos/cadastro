@@ -1,0 +1,14 @@
+SELECT * FROM pedido_compra;
+select ID_compra, numero_pedido, date_order, nome from pedido_compra as PC INNER JOIN vendedores AS VD ON PC.vendedor_id = VD.id_vendedores WHERE `ID_agente` = 1;
+
+select * 
+FROM pedido_compra as PC 
+INNER JOIN vendedores AS VD ON PC.vendedor_id = VD.id_vendedores
+INNER JOIN cidades as CD ON VD.id_vendedores = CD.id
+WHERE `ID_agente` = 1;
+
+select ID_compra, numero_pedido, date_order, VD.nome, CD.nome 
+FROM pedido_compra as PC 
+INNER JOIN vendedores AS VD ON PC.vendedor_id = VD.id_vendedores
+INNER JOIN cidades as CD ON VD.id_vendedores = CD.id
+WHERE `ID_agente` = 1;

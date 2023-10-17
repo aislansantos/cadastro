@@ -5,12 +5,15 @@ const getAllPurchaseOrder = async (req, res) => {
     return res.status(200).json(purchaseOrder);
 };
 
+
 const createPurchaseOrder = async (req, res) => {
     const createdPurchaseOrder = await purchaseOrderModels.createPurchaseOrder(
         req.body
     );
 
-    return res.status(201).json(`Cadastrado Pedido ID: ${createdPurchaseOrder.insertId}!`);
+    return res
+        .status(201)
+        .json(`Cadastrado Pedido ID: ${createdPurchaseOrder.insertId}!`);
 };
 
 module.exports = {

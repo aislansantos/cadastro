@@ -6,6 +6,7 @@ const getAllPurchaseOrder = async () => {
     return purchaseOrder;
 };
 
+
 const createPurchaseOrder = async (purchaseOrder) => {
     const { numero_pedido, ID_agente, obs } = purchaseOrder;
     const dateUTC = new Date(Date.now());

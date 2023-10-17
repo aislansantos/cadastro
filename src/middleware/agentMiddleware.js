@@ -23,6 +23,7 @@ const validateGet = (req, res, next) => {
     const { nome } = req.params;
 
     console.log(nome);
+    
 
     next();
 };
