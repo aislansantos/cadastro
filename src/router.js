@@ -58,6 +58,12 @@ router.post(
 //referente as rotas de cidade
 router.get("/cidades", cidadesController.getAllCities);
 router.get("/cidade/:municipio", cidadesController.getCity);
-router.post("/cidade", cidadesMiddleware.validateCity, cidadesController.createCity);
+router.post(
+    "/cidade",
+    cidadesMiddleware.validateCity,
+    cidadesController.createCity
+);
+router.delete("/cidade/:id", cidadesController.deleteCity);
+router.put("/cidade/:id", cidadesController.updateCity);
 
 module.exports = router;

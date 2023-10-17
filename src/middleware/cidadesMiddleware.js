@@ -6,9 +6,7 @@ function validateCity(req, res, next) {
             message: "Field municipio undefined or empty, check please",
         });
     }
-
-    console.log(body);
-
+    
     next();
 }
 
