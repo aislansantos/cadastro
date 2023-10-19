@@ -63,7 +63,7 @@ router.post(
     cidadesMiddleware.validateCity,
     cidadesController.createCity
 );
-router.delete("/cidade/:id", cidadesController.deleteCity);
+router.delete("/cidade/:id",cidadesMiddleware.validateCityExist, cidadesController.deleteCity);
 router.put("/cidade/:id",cidadesMiddleware.validateCityExist, cidadesController.updateCity);
 
 module.exports = router;
