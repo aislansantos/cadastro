@@ -64,6 +64,6 @@ router.post(
     cidadesController.createCity
 );
 router.delete("/cidade/:id", cidadesController.deleteCity);
-router.put("/cidade/:id", cidadesController.updateCity);
+router.put("/cidade/:id",cidadesMiddleware.validateCityExist, cidadesController.updateCity);
 
 module.exports = router;

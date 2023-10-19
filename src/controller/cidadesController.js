@@ -14,7 +14,6 @@ const getCity = async (req, res) => {
 
 const createCity = async (req, res) => {
     const createdMunicipio = await cidadesModels.createCity(req.body);
-
     return res.status(201).json(createdMunicipio);
 };
 
@@ -26,10 +25,8 @@ const deleteCity = async (req, res) => {
 
 const updateCity = async (req, res) => {
     const { id } = req.params;
-
-    await cidadesModels.updateCity(id, req.body);
-
-    return res.status(204).json();
+    const updatedCity = await cidadesModels.updateCity(id, req.body);
+    return res.status(204).json(updatedCity);
 };
 
 module.exports = {
