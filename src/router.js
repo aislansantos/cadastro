@@ -61,6 +61,7 @@ router.get("/cidade/:municipio", cidadesController.getCity);
 router.post(
     "/cidade",
     cidadesMiddleware.validateCity,
+    cidadesMiddleware.validateCityExistForName,
     cidadesController.createCity
 );
 router.delete("/cidade/:id",cidadesMiddleware.validateCityExist, cidadesController.deleteCity);

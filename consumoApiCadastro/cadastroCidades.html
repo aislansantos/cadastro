@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cidades Consulta</title>
+        <link rel="stylesheet" href="./arquivos/css/style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header></header>
+            <h1>Consulta cidades</h1>
+            <hr />
+            <form action="" method="post">
+                <input type="text" id="cadastro" />
+                <input type="submit" onclick="insertCities(cadastro.value)" value="Cadastro">
+            </form>
+            <hr />
+            <table>
+                <thead>
+                    <th>id</th>
+                    <th>Municipio</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody id="cidades"></tbody>
+            </table>
+        </div>
+        <script src="./arquivos/js/cidades.js"></script>
+    </body>
+</html>
