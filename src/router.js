@@ -7,6 +7,8 @@ const cidadesMiddleware = require("./middleware/cidadesMiddleware");
 const cadastroMiddleware = require("./middleware/agentMiddleware");
 const productsMiddleware = require("./middleware/productsMiddleware");
 const purchaseOrderMiddleware = require("./middleware/purchaseOrderMiddleware");
+const sellersController = require("./controller/sellerController");
+const sellersMiddleware = require("./middleware/sellerMiddleware");
 
 const router = express.Router();
 
@@ -28,8 +30,8 @@ router.put(
     cadastroController.updateAgente
 );
 
-// Routes referente a podutos
-// cadastro de tipos de produtos
+//* Routes referente a podutos
+//* cadastro de tipos de produtos
 router.get("/typesproducts", produtosController.getAllTypeProcuct);
 router.post(
     "/typeproducts",
@@ -39,7 +41,7 @@ router.post(
 router.delete("/typeproducts/:descricao", produtosController.deleteTypeProduct);
 router.put("/typeproducts/:id", produtosController.updateTypeProduct);
 
-//referente as rotas dos produtos
+//* referente as rotas dos produtos
 router.get("/products", produtosController.getAllProducts);
 router.post(
     "/product",
@@ -47,7 +49,7 @@ router.post(
     produtosController.createProduct
 );
 
-// referente as rotas de pedido de compra
+//* referente as rotas de pedido de compra
 router.get("/purchasesOrder", purchaseOrderController.getAllPurchaseOrder);
 router.post(
     "/purchaseOrder",
@@ -55,7 +57,7 @@ router.post(
     purchaseOrderController.createPurchaseOrder
 );
 
-//referente as rotas de cidade
+//* referente as rotas de cidade
 router.get("/cidades", cidadesController.getAllCities);
 router.get("/cidade/:municipio", cidadesController.getCity);
 router.post(
@@ -64,7 +66,34 @@ router.post(
     cidadesMiddleware.validateCityExistForName,
     cidadesController.createCity
 );
-router.delete("/cidade/:id",cidadesMiddleware.validateCityExist, cidadesController.deleteCity);
-router.put("/cidade/:id",cidadesMiddleware.validateCityExist, cidadesController.updateCity);
+router.delete(
+    "/cidade/:id",
+    cidadesMiddleware.validateCityExist,
+    cidadesController.deleteCity
+);
+router.put(
+    "/cidade/:id",
+    cidadesMiddleware.validateCityExist,
+    cidadesController.updateCity
+);
 
+//* Referente as rotas de vendedores
+router.get("/vendedores", sellersController.getAllSellers);
+router.get("/vendedor/:nome", sellersController.getSeller);
+router.post("/vendedor", sellersController.createSeller);
+router.delete("/vendedor/:nome", sellersController.deleteSeller);
+router.put(
+    "/vendedor/:id",
+    function (req, res, next) {
+        if (req.params.id == 0) {
+            return res.status(400).json({ message: "ID Errado" });
+        }
+        if (req.body.cidade_id == isNaN) {
+            return res.status(400).json({ message: "Verificar os Dados" });
+        }
+        next();
+    },
+    sellersMiddleware.validateDataUpdate,
+    sellersController.updateSeller
+);
 module.exports = router;

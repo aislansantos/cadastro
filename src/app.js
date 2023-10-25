@@ -6,8 +6,12 @@ const app = express();
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "*");
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
     res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader("allowedHeaders", "Content-Type");
     app.use(cors());
     next();
 });

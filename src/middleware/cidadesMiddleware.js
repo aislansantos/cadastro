@@ -27,7 +27,6 @@ async function validateCityExist(req, res, next) {
 async function validateCityExistForName(req, res, next) {
     const { body } = req;
     const verifyCity = await cidadesModels.getCity(body.municipio);
-    console.log(verifyCity);
     if (verifyCity.length > 0) {
         return res.status(400).json({
             message: `Cadastro já existe conferir cadastro ${verifyCity[0].id}`,

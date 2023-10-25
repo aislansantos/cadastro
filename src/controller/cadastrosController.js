@@ -7,15 +7,12 @@ const getAll = async (_req, res) => {
 
 const getAgente = async (req, res) => {
     const { nome } = req.params;
-
     const agente = await cadastroModel.getAgente(nome);
-
     return res.status(200).json(agente);
 };
 
 const createAgente = async (req, res) => {
     const createdAgente = await cadastroModel.createAgente(req.body);
-
     return res.status(201).json(`Id cadastrado: ${createdAgente.insertId}`);
 };
 

@@ -23,7 +23,9 @@ const getCityForId = async (id) => {
 const createCity = async (cidade) => {
     const query = "INSERT INTO cidades ( municipio) VALUES (?)";
     const { municipio } = cidade;
-    const [createdCity] = await connection.execute(query, [municipio]);
+    const [createdCity] = await connection.execute(query, [
+        municipio.toUpperCase(),
+    ]);
 
     return createdCity;
 };
