@@ -3,7 +3,7 @@ const produtoModel = require("../models/produtoModels");
 // referente ao tipo de produtos
 const getAllTypeProcuct = async (req, res) => {
     const typesProd = await produtoModel.getAllTypeProcuct();
-    
+
     return res.status(200).json(typesProd);
 };
 
@@ -36,6 +36,13 @@ const getAllProducts = async (_req, res) => {
 
     return res.status(200).json(products);
 };
+const getProduct = async (req, res) => {
+    const { descricao } = req.params;
+    console.log(descricao);
+    const produto = await produtoModel.getProduct(descricao);
+
+    return res.status(200).json(produto);
+};
 const createProduct = async (req, res) => {
     const createdProduct = await produtoModel.createProduct(req.body);
 
@@ -51,4 +58,5 @@ module.exports = {
     //products
     getAllProducts,
     createProduct,
+    getProduct,
 };

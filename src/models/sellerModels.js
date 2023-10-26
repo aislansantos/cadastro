@@ -2,21 +2,21 @@ const connection = require("./connection");
 
 const getAllSellers = async () => {
     const query =
-        "SELECT id, nome,cidade_id, municipio FROM vendedores INNER JOIN cidades ON vendedores.cidade_id = cidades.id";
+        "SELECT id, nome,cidade_id, municipio FROM cad_vendedores INNER JOIN cad_cidades ON cad_vendedores.cidade_id = cad_cidades.id";
     const [sellers] = await connection.execute(query);
     return sellers;
 };
 
 const getSeller = async (nome) => {
     const query =
-        "SELECT nome, cidade_id,  municipio FROM vendedores INNER JOIN cidades ON vendedores.cidade_id = cidades.id WHERE nome = ?";
+        "SELECT nome, cidade_id,  municipio FROM cad_vendedores INNER JOIN cad_cidades ON cad_vendedores.cidade_id = cad_cidades.id WHERE nome = ?";
     const [selectedSeller] = await connection.execute(query, [nome]);
     return selectedSeller;
 };
 
 const createSeller = async (seller) => {
     const { nome, cidade_id } = seller;
-    const query = "INSERT INTO vendedores (nome, cidade_id) VALUES (?,?)";
+    const query = "INSERT INTO cad_vendedores (nome, cidade_id) VALUES (?,?)";
 
     const [createdSeller] = await connection.execute(query, [nome, cidade_id]);
 
@@ -24,7 +24,7 @@ const createSeller = async (seller) => {
 };
 
 const deleteSeller = async (nome) => {
-    const query = "DELETE FROM vendedores WHERE  nome = ?";
+    const query = "DELETE FROM cad_vendedores WHERE  nome = ?";
     const removedSeller = await connection.execute(query, [nome]);
 
     return removedSeller;
@@ -32,7 +32,7 @@ const deleteSeller = async (nome) => {
 
 const updateSeller = async (id, seller) => {
     const query =
-        "UPDATE vendedores SET nome = ?, cidade_id = ? WHERE id_vendedores = ?";
+        "UPDATE cad_vendedores SET nome = ?, cidade_id = ? WHERE id_cad_vendedores = ?";
     const { nome, cidade_id } = seller;
 
     const [updatedSeller] = await connection.execute(query, [

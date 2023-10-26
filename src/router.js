@@ -31,7 +31,7 @@ router.put(
 );
 
 //* Routes referente a podutos
-//* cadastro de tipos de produtos
+// cadastro de tipos de produtos
 router.get("/typesproducts", produtosController.getAllTypeProcuct);
 router.post(
     "/typeproducts",
@@ -41,8 +41,9 @@ router.post(
 router.delete("/typeproducts/:descricao", produtosController.deleteTypeProduct);
 router.put("/typeproducts/:id", produtosController.updateTypeProduct);
 
-//* referente as rotas dos produtos
+// referente as rotas dos produtos
 router.get("/products", produtosController.getAllProducts);
+router.get("/product/:descricao", produtosController.getProduct);
 router.post(
     "/product",
     productsMiddleware.validateProductBody,
@@ -84,15 +85,6 @@ router.post("/vendedor", sellersController.createSeller);
 router.delete("/vendedor/:nome", sellersController.deleteSeller);
 router.put(
     "/vendedor/:id",
-    function (req, res, next) {
-        if (req.params.id == 0) {
-            return res.status(400).json({ message: "ID Errado" });
-        }
-        if (req.body.cidade_id == isNaN) {
-            return res.status(400).json({ message: "Verificar os Dados" });
-        }
-        next();
-    },
     sellersMiddleware.validateDataUpdate,
     sellersController.updateSeller
 );
