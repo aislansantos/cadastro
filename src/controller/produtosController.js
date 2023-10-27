@@ -49,6 +49,19 @@ const createProduct = async (req, res) => {
     return res.status(201).json(createdProduct.insertId);
 };
 
+const deleteProduct = async (req, res) => {
+    const { descricao } = req.params;
+
+    await produtoModel.deleteProduct(descricao);
+    return res.status(400).json();
+};
+
+const updateProduct = async (req, res) => {
+    const { id } = req.params;
+    await produtoModel.updateProduct(id, req.body);
+
+    return res.status(204).json();
+};
 module.exports = {
     //type of products
     getAllTypeProcuct,
@@ -59,4 +72,6 @@ module.exports = {
     getAllProducts,
     createProduct,
     getProduct,
+    deleteProduct,
+    updateProduct,
 };

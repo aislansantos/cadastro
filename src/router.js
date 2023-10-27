@@ -49,6 +49,8 @@ router.post(
     productsMiddleware.validateProductBody,
     produtosController.createProduct
 );
+router.delete("/product/:descricao", produtosController.deleteProduct);
+router.put("/product/:id", produtosController.updateProduct);
 
 //* referente as rotas de pedido de compra
 router.get("/purchasesOrder", purchaseOrderController.getAllPurchaseOrder);

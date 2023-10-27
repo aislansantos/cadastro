@@ -39,7 +39,9 @@ const updateTypeProduct = async (id, typeProduct) => {
 };
 
 const getAllProducts = async () => {
-    const query = "SELECT * FROM cad_products";
+    //const query = "SELECT * FROM cad_products";
+    const query =
+        "SELECT id_product, descricao, estoque, descricao_type_product FROM cad_products AS prod INNER JOIN cad_prod_tipo AS type_prod ON prod.codigo_type_product = type_prod.id_type_product";
 
     const [products] = await connection.execute(query);
 
@@ -47,7 +49,10 @@ const getAllProducts = async () => {
 };
 
 const getProduct = async (descricao) => {
-    const query = "SELECT * FROM cad_products WHERE descricao = ?";
+    //const query = "SELECT * FROM cad_products WHERE descricao = ?";
+    const query =
+        "SELECT id_product, descricao, estoque, descricao_type_product FROM cad_products AS prod INNER JOIN cad_prod_tipo AS type_prod ON prod.codigo_type_product = type_prod.id_type_product WHERE descricao = ?";
+
     const [selectedProduto] = await connection.execute(query, [descricao]);
     return selectedProduto;
 };
@@ -66,6 +71,28 @@ const createProduct = async (product) => {
     return createdProduct;
 };
 
+const deleteProduct = async (descricao) => {
+    const query = "DELETE FROM cad_products WHERE descricao = ?";
+
+    const removedProduct = await connection.execute(query, [descricao]);
+
+    return removedProduct;
+};
+
+const updateProduct = async (id, product) => {
+    const query =
+        "UPDATE cad_products SET descricao = ?,codigo_type_product = ? WHERE id_product  = ?";
+    const { descricao, codigo_type_product } = product;
+
+    const [updatedProduct] = await connection.execute(query, [
+        descricao,
+        codigo_type_product,
+        id,
+    ]);
+
+    return updatedProduct;
+};
+
 module.exports = {
     getAllTypeProcuct,
     createTypeProduct,
@@ -74,4 +101,6 @@ module.exports = {
     getAllProducts,
     getProduct,
     createProduct,
+    deleteProduct,
+    updateProduct,
 };
