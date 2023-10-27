@@ -1,10 +1,12 @@
 const connection = require("./connection");
 
 const getAllPurchaseOrder = async () => {
-    const query = "SELECT * FROM pedido_compra";
+    const query = "SELECT  Id_compra,  numero_pedido, obs,  date_order,  data_lacamento, nome_agente FROM pedido_compra as pc INNER JOIN cad_agentes as ca ON pc.ID_agente = ca. id ";
     const [purchaseOrder] = await connection.execute(query);
     return purchaseOrder;
 };
+
+
 
 const createPurchaseOrder = async (purchaseOrder) => {
     const { numero_pedido, ID_agente, obs } = purchaseOrder;
@@ -21,6 +23,8 @@ const createPurchaseOrder = async (purchaseOrder) => {
 
     return createdPurchaseOrder;
 };
+
+
 
 module.exports = {
     getAllPurchaseOrder,
