@@ -15,7 +15,7 @@ const getPurchaseOrder = async (req, res) => {
     const itemPurchaseOrder =
         await itemPurchaseOrderModels.getItensForPurchaseOrder(itens);
 
-    res.status(200).json([purchaseOrder, [itemPurchaseOrder]]);
+    res.status(200).json([purchaseOrder, {itemPurchaseOrder}]);
 };
 
 const createPurchaseOrder = async (req, res) => {
