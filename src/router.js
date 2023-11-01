@@ -9,6 +9,7 @@ const productsMiddleware = require("./middleware/productsMiddleware");
 const purchaseOrderMiddleware = require("./middleware/purchaseOrderMiddleware");
 const sellersController = require("./controller/sellerController");
 const sellersMiddleware = require("./middleware/sellerMiddleware");
+const itemPurchaseOrderController = require("./controller/itensPurchaseOrderController");
 
 const router = express.Router();
 
@@ -41,7 +42,7 @@ router.post(
 router.delete("/typeproducts/:descricao", produtosController.deleteTypeProduct);
 router.put("/typeproducts/:id", produtosController.updateTypeProduct);
 
-// referente as rotas dos produtos
+//* referente as rotas dos produtos
 router.get("/products", produtosController.getAllProducts);
 router.get("/product/:descricao", produtosController.getProduct);
 router.post(
@@ -59,6 +60,12 @@ router.post(
     purchaseOrderMiddleware.validateData,
     purchaseOrderController.createPurchaseOrder
 );
+router.get(
+    "/purchaseOrder/:numero_pedido",
+    purchaseOrderController.getPurchaseOrder
+);
+router.delete("/purchaseOrder", purchaseOrderController.deletePurchaseOrder);
+//* router de put ainda está sendo pensado o que pode ser alterado, para manter a segurança das informações
 
 //* referente as rotas de cidade
 router.get("/cidades", cidadesController.getAllCities);
@@ -89,5 +96,11 @@ router.put(
     "/vendedor/:id",
     sellersMiddleware.validateDataUpdate,
     sellersController.updateSeller
+);
+
+//*teste rotas de itens
+router.get(
+    "/itensVendas/:numero_pedido",
+    itemPurchaseOrderController.getItemPurchaseOrder
 );
 module.exports = router;

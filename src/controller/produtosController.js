@@ -38,7 +38,6 @@ const getAllProducts = async (_req, res) => {
 };
 const getProduct = async (req, res) => {
     const { descricao } = req.params;
-    console.log(descricao);
     const produto = await produtoModel.getProduct(descricao);
 
     return res.status(200).json(produto);
