@@ -61,6 +61,10 @@ router.post(
     purchaseOrderController.createPurchaseOrder
 );
 router.get(
+    "/purchaseOrderWithItens/:numero_pedido",
+    purchaseOrderController.getPurchaseOrderWithItens
+);
+router.get(
     "/purchaseOrder/:numero_pedido",
     purchaseOrderController.getPurchaseOrder
 );
@@ -98,9 +102,14 @@ router.put(
     sellersController.updateSeller
 );
 
-//*teste rotas de itens
+//* referente as rotas dos itens dos pedidos de compra
 router.get(
-    "/itensVendas/:numero_pedido",
+    "/itensCompra",
+    itemPurchaseOrderController.getAllItensPurchaseOrder
+);
+router.get(
+    "/itensCompras/:numero_pedido",
     itemPurchaseOrderController.getItemPurchaseOrder
 );
+
 module.exports = router;

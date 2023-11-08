@@ -6,16 +6,32 @@ const getAllPurchaseOrder = async (req, res) => {
     return res.status(200).json(purchaseOrder);
 };
 
+// função que junta duas responsabilidades para consulta somente
+const getPurchaseOrderWithItens = async (req, res) => {
+    try {
+        const { numero_pedido } = req.params;
+        const purchaseOrder = await purchaseOrderModels.getPurchaseOrder(
+            numero_pedido
+        );
+        const itemPurchaseOrder =
+            await itemPurchaseOrderModels.getItensForPurchaseOrder(
+                purchaseOrder[0].Id_compra
+            );
+
+        return res.status(200).json([purchaseOrder, itemPurchaseOrder]);
+    } catch (error) {
+        // Lide com erros apropriadamente aqui
+        console.error(error);
+        return res.status(500).json({ error: "Erro interno do servidor" });
+    }
+};
+
 const getPurchaseOrder = async (req, res) => {
     const { numero_pedido } = req.params;
     const purchaseOrder = await purchaseOrderModels.getPurchaseOrder(
         numero_pedido
     );
-    const itens = purchaseOrder[0].Id_compra;
-    const itemPurchaseOrder =
-        await itemPurchaseOrderModels.getItensForPurchaseOrder(itens);
-
-    res.status(200).json([purchaseOrder, {itemPurchaseOrder}]);
+    return res.status(200).json(purchaseOrder);
 };
 
 const createPurchaseOrder = async (req, res) => {
@@ -37,6 +53,7 @@ const deletePurchaseOrder = async (req, res) => {
 module.exports = {
     getAllPurchaseOrder,
     getPurchaseOrder,
+    getPurchaseOrderWithItens,
     createPurchaseOrder,
     deletePurchaseOrder,
 };

@@ -9,7 +9,7 @@ const getAllPurchaseOrder = async () => {
 
 const getPurchaseOrder = async (purchaseOrder) => {
     const query =
-        "SELECT  Id_compra,  numero_pedido, obs,  date_order,  data_lacamento, nome_agente FROM pedido_compra as pc INNER JOIN cad_agentes as ca ON pc.ID_agente = ca.id WHERE numero_pedido = ?";
+        "SELECT  PC.Id_compra ,PC.numero_pedido AS `Numero do Pedido`, CA.nome_agente as `Fornecedor`, PC.data_lacamento AS `Pedido Lançado Em`, PC.date_order AS `Venda Efetuada Em`, PC.obs AS `Observação` from pedido_compra as PC INNER JOIN cad_agentes AS CA on PC.`ID_agente` = CA.id WHERE numero_pedido = ?";
     const [purchasedOrder] = await connection.execute(query, [purchaseOrder]);
     return purchasedOrder;
 };
